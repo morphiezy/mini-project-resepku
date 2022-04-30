@@ -1,0 +1,16 @@
+.submit_button{
+    width: 100%;
+    height: 48px;
+}
+
+.footer_text{
+    color:var(--subtitle-color);
+    font-weight: 400;
+    font-size: 0.875rem;
+}
+
+.highlight_text{
+    color:var(--primary-color);
+    font-weight: 700;
+    text-decoration: none;
+}

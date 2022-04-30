@@ -1,0 +1,32 @@
+.button{
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 7px;
+  border: 2px solid var(--primary-color);
+}
+
+.button_fill {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.button_fill:hover {
+  background-color: #fff;
+  color: var(--primary-color);
+}
+
+.button_stroke{
+  background: #fff;
+  color: var(--primary-color);
+}
+
+.button_stroke:hover{
+  background: var(--primary-color);
+  color: #fff;
+}

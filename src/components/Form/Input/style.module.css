@@ -1,0 +1,13 @@
+.custom_form{
+    border:1px solid #D3D3D7;
+    border-radius: 7px;
+    font-size: 0.875rem;
+    width: 100%;
+    height: 48px;
+    padding: 0 20px;
+    color: var(--title-color)
+}
+
+.custom_form::placeholder{
+    color:var(--subtitle-color)
+}

@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { lazy } from 'react';
+import { Routes,Route } from 'react-router-dom';
 
-function App() {
+import { ProtectedRoute } from './components/ProtectedRoute';
+import { useSelector } from 'react-redux';
+
+
+const Login = lazy(()=> import('./pages/Login'))
+
+
+const App = () => {
+
+  const isAunthenticated = useSelector(state => state.user.authenticated);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="container-fluid">
+      <Routes>
+        <Route 
+          element={ <ProtectedRoute isAllowed={isAunthenticated}/> }
         >
-          Learn React
-        </a>
-      </header>
+          <Route path='/login' element={<Login/>}/> 
+        </Route>
+      </Routes>
     </div>
   );
 }
