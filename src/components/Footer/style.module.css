@@ -1,0 +1,7 @@
+.container{
+    background-color: var(--primary-color);
+}
+
+.container > img{
+    width: 220px;
+}

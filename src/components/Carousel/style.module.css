@@ -1,0 +1,23 @@
+.scrolling_carousel_filter > div[data-arrow="left"] , .scrolling_carousel_filter > div[data-arrow="right"]{
+    display: none;
+} 
+
+.filter_btn{
+    padding: 0.75rem 1.8rem;
+    border-radius: 40px;
+    margin-right: 25px;
+}
+
+.scrolling_carousel_content > div[data-arrow="left"] , .scrolling_carousel_content > div[data-arrow="right"]{
+    position: absolute;
+    transform: translateY(-50%);
+    top:50%;
+}
+
+.scrolling_carousel_content > div[data-arrow="left"] {
+    left: 0;
+}
+
+.scrolling_carousel_content > div[data-arrow="right"]{
+    right: 0;
+}
