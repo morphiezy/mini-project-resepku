@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 
 const Login = lazy(()=> import('./pages/Login'))
 const Register = lazy(()=> import('./pages/Register'))
+const Home = lazy(()=> import('./pages/Home'))
 
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
   return (
     <div className="container-fluid">
       <Routes>
+        <Route path="/" element={<Home/>}/>
         <Route 
           element={ <ProtectedRoute isAllowed={isAunthenticated}/> }
         >
