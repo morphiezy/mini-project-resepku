@@ -48,7 +48,7 @@ const MyCarousel = ({carousel_title , content_type }) => {
 
 
     return(
-        <div className="mt-5 py-5">
+        <div className="mt-3 mt-lg-5 py-5">
             <h2 className="fs-2 fw-bold">{carousel_title}</h2>
             <ScrollingCarousel className={`mt-5 ${scrolling_carousel_filter}`}>
                 {
@@ -74,6 +74,7 @@ const MyCarousel = ({carousel_title , content_type }) => {
 
                             <CardArticle
                                 key={item.title}
+                                link={item.key}
                                 custom_style="me-3"
                                 thumbnail={item.thumb}
                                 category={item.tags}
@@ -82,6 +83,7 @@ const MyCarousel = ({carousel_title , content_type }) => {
                             <CardRecipe 
                                 custom_style="me-3"
                                 key={item.key}
+                                link={item.key}
                                 img={item.thumb}
                                 title={item.title}
                                 porsi={item.portion}

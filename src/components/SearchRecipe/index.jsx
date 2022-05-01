@@ -15,11 +15,15 @@ const SearchRecipe = ({custom_style}) => {
   const navigate = useNavigate();
 
   const handleInputChange = (e) => setValue(e.target.value);
-  const searchingRecipe = () => navigate(`/search?q=${value}`);
+
+  const searchingRecipe = (e) =>{
+    e.preventDefault();
+    return value.trim().length === 0 ? false : navigate(`/search?q=${value}`);
+  }
 
   return (
-    <div className={`d-flex ${container_search} ${custom_style}`}>
-      <input
+    <form className={`d-flex ${container_search} ${custom_style}`} onSubmit={searchingRecipe}>
+     <input
         className={`form-control ${input_field}`}
         type="text"
         value={value}
@@ -28,12 +32,13 @@ const SearchRecipe = ({custom_style}) => {
         aria-label="default input example"
       />
       <Button
+        isSubmit={true}
         btn_model="fill"
         text="Cari"
         custom_button={search_btn}
         onButtonClick={searchingRecipe}
       />
-    </div>
+    </form>
   );
 };
 

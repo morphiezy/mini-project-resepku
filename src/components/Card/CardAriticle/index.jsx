@@ -3,9 +3,9 @@ import style from './style.module.css';
 
 const {container_card,thumbnail_wrapper,label_text,title_text} = style
 
-const CardArticle = ({custom_style,thumbnail,category,title}) => {
+const CardArticle = ({custom_style,link,thumbnail,category,title}) => {
     return(
-        <NavLink to='/' className={`${custom_style} ${container_card}`}>
+        <NavLink to={`/artikel/${link}`} className={`${custom_style} ${container_card}`}>
             <div className={thumbnail_wrapper}>
                 <img src={thumbnail} alt="thumbnail"/>
             </div>
