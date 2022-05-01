@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 
 
 const Login = lazy(()=> import('./pages/Login'))
+const Register = lazy(()=> import('./pages/Register'))
 
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
           element={ <ProtectedRoute isAllowed={isAunthenticated}/> }
         >
           <Route path='/login' element={<Login/>}/> 
+          <Route path='/register' element={<Register/>}/> 
         </Route>
       </Routes>
     </div>
