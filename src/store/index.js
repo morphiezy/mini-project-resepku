@@ -12,15 +12,17 @@ import storage from "redux-persist/lib/storage";
 
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import userReducer from "./User/userSlice";
+import contentReducer from './Content/ContentSlice'
 
 
 const persistConfig = {
   key: "root",
   version: 1,
   storage,
+  blacklist:['content']
 };
 
-const reducers = combineReducers({ user: userReducer });
+const reducers = combineReducers({ user: userReducer, content:contentReducer });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 

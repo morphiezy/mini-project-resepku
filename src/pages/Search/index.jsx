@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
+import { useDispatch , useSelector} from "react-redux";
+import { searchRecipe } from "../../store/Content/thunk";
+
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import CardRecipe from "../../components/Card/CardRecipe";
@@ -15,25 +18,23 @@ import animation from '../../img/animation-2.png'
 const { container_result, grid_card, thin_text , flex_container} = style;
 
 const Search = () => {
-  const [results, setResults] = useState([]);
+
   const [loading, setLoading] = useState(false);
   const [searchParams] = useSearchParams();
 
+  const dispatch = useDispatch();
+  const results = useSelector(state => state.content.search.results);
+
   const fetchResep = async () => {
     setLoading(true);
-    const response = await fetch(
-      `https://masak-apa-tomorisakura.vercel.app/api/search?q=${searchParams.get(
-        "q",
-      )}`,
-    );
-    const data = await response.json();
-    setResults(data.results);
+    await dispatch(searchRecipe(searchParams.get('q')))
     setLoading(false);
   };
 
   useEffect(() => {
     fetchResep();
   }, [searchParams]);
+
 
   return (
     <>
