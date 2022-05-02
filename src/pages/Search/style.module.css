@@ -1,0 +1,37 @@
+.container_result{
+    display: grid;
+    min-height: 600px;
+    height: auto;
+    grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+    grid-auto-rows: 270px;
+    gap: 20px;
+}
+
+.grid_card{
+    max-width: 100%;
+    min-width: 0;
+}
+
+.thin_text{
+    font-size: 0.875rem;
+    font-weight: 400;
+}
+
+
+
+@media screen and (max-width: 992px){
+   
+    .flex_container > div:first-of-type > img {
+        width: 250px;
+    }
+}
+
+
+@media screen and (max-width: 576px) {
+    
+    .container_result{
+        grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+        gap: 25px;
+    }
+
+}

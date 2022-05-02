@@ -5,7 +5,7 @@ const { container } = style;
 
 const Footer = () => {
     return(
-        <div className={`container-fluid p-5 mt-5 ${container}`}>
+        <div className={`container-fluid p-3 p-lg-5 mt-5 ${container}`}>
             <img src={Logo} alt="logo" className='d-block mx-auto my-5'/>
         </div>
     )

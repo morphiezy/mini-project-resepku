@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 const Login = lazy(()=> import('./pages/Login'))
 const Register = lazy(()=> import('./pages/Register'))
 const Home = lazy(()=> import('./pages/Home'))
+const Search = lazy(()=> import('./pages/Search'));
 
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
           <Route path='/login' element={<Login/>}/> 
           <Route path='/register' element={<Register/>}/> 
         </Route>
+        <Route path='/search' element={<Search/>}/>
       </Routes>
     </div>
   );

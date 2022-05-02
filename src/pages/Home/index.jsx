@@ -1,3 +1,5 @@
+import { useMobileDetect } from "../../customHooks/useMobileDetect";
+
 import SearchRecipe from "../../components/SearchRecipe";
 import Navbar from "../../components/Navbar";
 import MyCarousel from "../../components/Carousel";
@@ -15,11 +17,13 @@ const {
 
 const Home = () => {
 
+  const [mobile] = useMobileDetect(579)
+
   return (
     <>
       <Navbar />
 
-      <div className="container-fluid px-5">
+      <div className="container-fluid mt-5 mt-lg-0 px-4">
         <div className="special-container py-4">
           
           {/* Welcome Area */}
@@ -36,7 +40,7 @@ const Home = () => {
                 dan lezat disertai dengan informasi durasi dan tingkat kesulitan
                 saat memasak. Tunggu apa lagi, ayo mulai cari resep sekarang !
               </p>
-              <SearchRecipe custom_style="mt-5" />
+              {mobile ? false : <SearchRecipe custom_style="mt-5" />}
             </div>
             <div className="col-lg-6 p-lg-5 d-flex justify-content-center justify-content-lg-end">
               <img

@@ -1,5 +1,5 @@
 import { ScrollingCarousel } from "@trendyol-js/react-carousel";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import CardRecipe from "../Card/CardRecipe";
 import CardArticle from "../Card/CardAriticle";
@@ -8,6 +8,10 @@ import ButtonArrow from "./ButtonArrow";
 
 import style from './style.module.css';
 
+import { useDispatch, useSelector } from "react-redux";
+import { fetchFilterContent } from "../../store/Content/thunk";
+import { changeFilter } from "../../store/Content/ContentSlice";
+
 
 
 const {scrolling_carousel_filter, scrolling_carousel_content, filter_btn} = style;
@@ -15,50 +19,30 @@ const {scrolling_carousel_filter, scrolling_carousel_content, filter_btn} = styl
 
 const MyCarousel = ({carousel_title , content_type }) => {
 
-    const [filterList,setFilterList] = useState([]);
-    const [currentFilter,setCurrentFilter] = useState(null)
+    const carouselData = useSelector(state => state.content[content_type]);
+    const currentFilter = carouselData.currentFilter;
 
-    const [contentList,setContentList] = useState([])
-
-    const changeFilter = (key) => setCurrentFilter(key)
-
-
-    const requestFullContent = async (firstFetch) => {
-
-        let initialContent = "";
-
-        if(firstFetch){
-            const getFilter = await fetch(`https://masak-apa-tomorisakura.vercel.app/api/categorys/${content_type}`);
-            const responseFilter = await getFilter.json();
-            setFilterList(responseFilter.results);
-            initialContent = responseFilter.results[0].key;
-            setCurrentFilter(initialContent)
-        }
-       
-        const getContent = await fetch(`https://masak-apa-tomorisakura.vercel.app/api/categorys/${content_type}/${firstFetch ? initialContent : currentFilter}`);
-        const responseContent = await getContent.json();
-        setContentList(responseContent.results);
-    }
+    const dispatch = useDispatch();
 
 
     useEffect(()=>{
-        const contentLength = contentList.length > 0;
-        requestFullContent(!contentLength)
+        const contentLength = carouselData.list.length > 0;
+        dispatch(fetchFilterContent({initialFetch:!contentLength , contentType: content_type}))
     },[currentFilter])
 
 
     return(
-        <div className="mt-5 py-5">
+        <div className="mt-3 mt-lg-5 py-5">
             <h2 className="fs-2 fw-bold">{carousel_title}</h2>
             <ScrollingCarousel className={`mt-5 ${scrolling_carousel_filter}`}>
                 {
-                    filterList.map(filter => 
+                    carouselData.filter.map(filter => 
                         <Button 
                             key={filter.key}
                             text={filter.category || filter.title} 
                             btn_model={currentFilter === filter.key ? "fill" : "stroke"}
-                            onButtonClick={()=> changeFilter(filter.key)}
                             custom_button={filter_btn}
+                            onButtonClick={()=> dispatch(changeFilter({ type: content_type , value : filter.key}))}
                         />
                     )
                 }
@@ -69,11 +53,12 @@ const MyCarousel = ({carousel_title , content_type }) => {
                 rightIcon={<ButtonArrow google_icon="chevron_right"/>}
             >
                 {
-                    contentList.map(item => {
+                    carouselData.list.map(item => {
                         return content_type === "article" ? 
 
                             <CardArticle
                                 key={item.title}
+                                link={item.key}
                                 custom_style="me-3"
                                 thumbnail={item.thumb}
                                 category={item.tags}
@@ -82,6 +67,7 @@ const MyCarousel = ({carousel_title , content_type }) => {
                             <CardRecipe 
                                 custom_style="me-3"
                                 key={item.key}
+                                link={item.key}
                                 img={item.thumb}
                                 title={item.title}
                                 porsi={item.portion}

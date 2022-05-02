@@ -1,4 +1,5 @@
 .card_container{
+    display: block;
     max-width: 240px;
     min-width: 232px;
     width: 100%;
