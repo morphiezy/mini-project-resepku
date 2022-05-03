@@ -12,19 +12,29 @@ import storage from "redux-persist/lib/storage";
 
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import userReducer from "./User/userSlice";
-import contentReducer from './Content/ContentSlice'
+import contentReducer from "./Content/ContentSlice";
+import recipeReducer from "./Recipe/recipeSlice";
+
+
 
 
 const persistConfig = {
   key: "root",
   version: 1,
   storage,
-  blacklist:['content']
+  blacklist: ["content", "recipe"],
 };
 
-const reducers = combineReducers({ user: userReducer, content:contentReducer });
+
+const reducers = combineReducers({
+  user: userReducer,
+  content: contentReducer,
+  recipe: recipeReducer,
+});
+
 
 const persistedReducer = persistReducer(persistConfig, reducers);
+
 
 const store = configureStore({
   reducer: persistedReducer,
@@ -36,6 +46,7 @@ const store = configureStore({
     }),
 });
 
+
 const persistor = persistStore(store);
 
-export { store , persistor};
+export { store, persistor };

@@ -10,12 +10,12 @@ import CardRecipe from "../../components/Card/CardRecipe";
 import Loading from "../../components/Loading";
 
 import style from "./style.module.css";
-import animation from '../../img/animation-2.png'
+import ContentNotFound from "../../components/ContentNotFound";
 
 
 
 
-const { container_result, grid_card, thin_text , flex_container} = style;
+const { container_result, grid_card, thin_text } = style;
 
 const Search = () => {
 
@@ -75,21 +75,7 @@ const Search = () => {
 
                         :
 
-                        <div className={`row mx-auto ${flex_container}`}>
-                            <div className="col-lg-6 d-flex justify-content-center ">
-                                <img
-                                src={animation}
-                                alt="animation-img"
-                                className="img-fluid"
-                                draggable="false"
-                                />
-                            </div>
-                            <div className="col-lg-6 p-0 pe-lg-5 mt-5 mt-lg-0 d-flex flex-column justify-content-center">
-                                <h2 className="fw-bold fs-2 text-capitalize">Yaaah...</h2>
-                                <p className={`mt-3 mb-0 lh-lg ${thin_text}`}> Sepertinya kami tidak dapat menemukan resep <span className="fw-bold text-capitalize"> "{searchParams.get("q")}" </span> yang kamu minta.</p>
-                                <p className={`mt-1 mb-0 ${thin_text}`}> Yuk coba cari dengan keyword lain.</p>
-                            </div>
-                        </div>
+                        <ContentNotFound content_name="resep"/>
                 
                 }
             </div>

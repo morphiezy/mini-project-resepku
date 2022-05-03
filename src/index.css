@@ -35,3 +35,7 @@ body{
     min-width: 200px;
     margin: auto;
 }
+
+.text_highlight{
+    color:var(--primary-color);
+}
