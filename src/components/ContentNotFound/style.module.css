@@ -1,0 +1,11 @@
+.thin_text{
+    font-size: 0.875rem;
+    font-weight: 400;
+}
+
+@media screen and (max-width: 992px){
+   
+    .flex_container > div:first-of-type > img {
+        width: 250px;
+    }
+}
