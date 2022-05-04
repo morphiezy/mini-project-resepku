@@ -10,6 +10,7 @@ const Register = lazy(()=> import('./pages/Register'))
 const Home = lazy(()=> import('./pages/Home'))
 const Search = lazy(()=> import('./pages/Search'));
 const Recipe = lazy(()=> import('./pages/Recipe'));
+const Article = lazy(()=> import('./pages/Article'));
 
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
         </Route>
         <Route path='/search' element={<Search/>}/>
         <Route path='/resep/:key' element={<Recipe/>}/>
+        <Route path='/artikel/:tag/:key' element={<Article/>}/>
       </Routes>
     </div>
   );
