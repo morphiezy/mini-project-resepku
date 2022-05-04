@@ -11,6 +11,7 @@ const Home = lazy(()=> import('./pages/Home'))
 const Search = lazy(()=> import('./pages/Search'));
 const Recipe = lazy(()=> import('./pages/Recipe'));
 const Article = lazy(()=> import('./pages/Article'));
+const CreateRecipe = lazy(()=> import('./pages/CreateRecipe'));
 
 
 const App = () => {
@@ -21,15 +22,17 @@ const App = () => {
     <div className="container-fluid">
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route 
-          element={ <ProtectedRoute isAllowed={isAunthenticated}/> }
-        >
+        <Route element={ <ProtectedRoute isAllowed={!!isAunthenticated}/> }>
           <Route path='/login' element={<Login/>}/> 
           <Route path='/register' element={<Register/>}/> 
+        </Route>
+        <Route element={<ProtectedRoute isAllowed={!isAunthenticated} redirectPath="*"/>}>
+          <Route path='/create-recipe' element={<CreateRecipe/>}/>
         </Route>
         <Route path='/search' element={<Search/>}/>
         <Route path='/resep/:key' element={<Recipe/>}/>
         <Route path='/artikel/:tag/:key' element={<Article/>}/>
+        <Route path='*' element={<h1>Not found</h1>}/>
       </Routes>
     </div>
   );
