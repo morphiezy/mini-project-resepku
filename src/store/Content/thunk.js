@@ -1,4 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { client } from "../../apollo-client";
+import { SearchUserRecipe } from "../../GraphQL/Recipe/queries";
 
 
 const fetchFilterContent = createAsyncThunk('content/GET', async (arg,{ getState }) => {
@@ -31,9 +33,20 @@ const fetchFilterContent = createAsyncThunk('content/GET', async (arg,{ getState
 
 
 const searchRecipe = createAsyncThunk('content/search' , async (value) =>{
+
     const fetchData = await fetch(`https://masak-apa-tomorisakura.vercel.app/api/search?q=${value}`);
     const data = await fetchData.json();
-    return data.results;
+
+    const fetchUserRecipe = await client.query({
+        query: SearchUserRecipe,
+        variables: {_like:`%${value}%`},
+        notifyOnNetworkStatusChange: true,
+    });
+
+    return {
+        apollo: fetchUserRecipe.data.resep,
+        api: data.results
+    }
 })
 
 

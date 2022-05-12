@@ -66,6 +66,24 @@
     display: none;
 }
 
+.bookmark_btn{
+  position: absolute;
+  top:25px;
+  right: 30px;
+  border: none;
+  background-color: transparent;
+}
+
+.bookmark_btn > span{
+  color:#A7A7A8;
+  font-size: 2rem;
+}
+
+.bookmark_btn > span:hover , .on_bookmark{
+  color:#FD6A00 !important;
+}
+
+
 
 @media screen and (max-width: 992px) {
 
@@ -113,7 +131,14 @@
 }
 
 @media screen and (max-width: 576px) {
+  
   .container_thumbnail {
     margin-top: 45px;
   }
+
+  .bookmark_btn{
+    top:35px;
+    right: 45px;
+  }
+
 }

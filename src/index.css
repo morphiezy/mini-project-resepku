@@ -39,3 +39,11 @@ body{
 .text_highlight{
     color:var(--primary-color);
 }
+
+.ql-editor{
+    min-height: 250px;
+}
+
+p{
+    margin-bottom: 0;
+}

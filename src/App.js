@@ -12,27 +12,29 @@ const Search = lazy(()=> import('./pages/Search'));
 const Recipe = lazy(()=> import('./pages/Recipe'));
 const Article = lazy(()=> import('./pages/Article'));
 const CreateRecipe = lazy(()=> import('./pages/CreateRecipe'));
+const NoMatch = lazy(()=> import('./pages/NoMatch'));
+
 
 
 const App = () => {
 
-  const isAunthenticated = useSelector(state => state.user.authenticated);
+  const isAuthenticated = useSelector(state => state.user.authenticated);
 
   return (
     <div className="container-fluid">
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route element={ <ProtectedRoute isAllowed={!!isAunthenticated}/> }>
+        <Route element={ <ProtectedRoute authenticated={!isAuthenticated}/> }>
           <Route path='/login' element={<Login/>}/> 
           <Route path='/register' element={<Register/>}/> 
         </Route>
-        <Route element={<ProtectedRoute isAllowed={!isAunthenticated} redirectPath="*"/>}>
+        <Route element={<ProtectedRoute authenticated={isAuthenticated} children={<NoMatch/>}/>}>
           <Route path='/create-recipe' element={<CreateRecipe/>}/>
         </Route>
         <Route path='/search' element={<Search/>}/>
-        <Route path='/resep/:key' element={<Recipe/>}/>
+        <Route path='/resep/:key' element={<Recipe auth={isAuthenticated}/>}/>
         <Route path='/artikel/:tag/:key' element={<Article/>}/>
-        <Route path='*' element={<h1>Not found</h1>}/>
+        <Route path='*' element={<NoMatch/>}/>
       </Routes>
     </div>
   );
