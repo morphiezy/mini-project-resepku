@@ -12,6 +12,7 @@ const Search = lazy(()=> import('./pages/Search'));
 const Recipe = lazy(()=> import('./pages/Recipe'));
 const Article = lazy(()=> import('./pages/Article'));
 const CreateRecipe = lazy(()=> import('./pages/CreateRecipe'));
+const MyCreation = lazy(()=> import('./pages/MyCreation'));
 const NoMatch = lazy(()=> import('./pages/NoMatch'));
 
 
@@ -30,6 +31,7 @@ const App = () => {
         </Route>
         <Route element={<ProtectedRoute authenticated={isAuthenticated} children={<NoMatch/>}/>}>
           <Route path='/create-recipe' element={<CreateRecipe/>}/>
+          <Route path='/my-creation' element={<MyCreation/>}/>
         </Route>
         <Route path='/search' element={<Search/>}/>
         <Route path='/resep/:key' element={<Recipe auth={isAuthenticated}/>}/>

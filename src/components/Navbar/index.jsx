@@ -98,6 +98,11 @@ const Navbar = () => {
                     </a>
                   </li>
                   <li>
+                    <a className="dropdown-item" href="/my-creation">
+                      My Creation
+                    </a>
+                  </li>
+                  <li>
                     <a className="dropdown-item" href="/bookmark-recipe">
                       Bookmark
                     </a>
