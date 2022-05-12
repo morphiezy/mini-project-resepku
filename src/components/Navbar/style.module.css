@@ -45,11 +45,11 @@
 
 .menu_list{
     top:50px !important;
+    font-size: 0.875rem;
 }
 
 .menu_list > li > a{
     padding:  0.5rem 1rem;
-    font-size: 0.875rem;
 }
 
 

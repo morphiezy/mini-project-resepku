@@ -1,10 +1,19 @@
 import { useEffect, useState } from "react";
 import { useMobileDetect } from "../../customHooks/useMobileDetect";
 
-import { useParams } from "react-router-dom";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+import parse from 'html-react-parser';
+
+import { useNavigate, useParams } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 import { fetchDetailRecipe } from "../../store/Recipe/thunk";
+
+import { useMutation, useQuery } from "@apollo/client";
+import { FindBookmarkRecipe, AddBookMark, DeleteBookMark} from "../../GraphQL/Bookmark/queries";
+
 
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -12,12 +21,13 @@ import Loading from "../../components/Loading";
 import ContentNotFound from "../../components/ContentNotFound";
 
 import Banner from "../../img/banner-resepku.png";
-
 import ControllerIcon from "../../img/controller.svg";
 import TwoUserIcon from "../../img/two-user.svg";
 import TimeIcon from "../../img/time.svg";
 
 import style from "./style.module.css";
+
+
 
 
 const {
@@ -27,21 +37,84 @@ const {
   absolute_board_recipe,
   container_category_recipe,
   container_list_ingredient,
-  toggle_ingredient_mobile
+  toggle_ingredient_mobile,
+  bookmark_btn,
+  on_bookmark
 } = style;
 
 
 
-const Recipe = () => {
+const Recipe = ({auth}) => {
 
   const [loading, setLoading] = useState(false);
-  const [show,setShow] = useState(false)
+  const [show,setShow] = useState(false);
+  const [isBookmark,setBookmark] = useState(false);
 
   const [mobile] = useMobileDetect(992);
 
   const recipe = useSelector((state) => state.recipe);
+  const user = useSelector(state => state.user);
+
   const dispatch = useDispatch();
   const params = useParams();
+  const navigate = useNavigate();
+  const MySwal = withReactContent(Swal);
+
+
+  const graphQLVar = {
+    key: params.key,
+    user_id: user.id
+  }
+
+  const { data } = useQuery(FindBookmarkRecipe , 
+    { 
+      variables : { 
+        key : params.key , 
+        user_id : user.id 
+      },
+      onCompleted : (data) => setBookmark(data.bookmark.length !== 0)
+    }
+  );
+
+
+  const [addBookMark] = useMutation(AddBookMark);
+  const [removeBookmark] = useMutation(DeleteBookMark);
+
+
+  const bookmarkOnClick = () => {
+
+    if(!auth) return navigate('/login')
+
+    const Toast = MySwal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 1000,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+
+
+    if(isBookmark){
+      setBookmark(false)
+      Toast.fire({
+        icon: 'success',
+        title: 'Unbookmark Recipe'
+      })
+      return removeBookmark({ variables : graphQLVar })
+    }
+    else{
+      setBookmark(true)
+      Toast.fire({
+        icon: 'success',
+        title: 'Bookmark Recipe'
+      })
+      return addBookMark({variables : graphQLVar})
+    }
+
+  }
 
   const fetchingRecipe = async () => {
     setLoading(true);
@@ -52,6 +125,7 @@ const Recipe = () => {
   useEffect(() => {
     fetchingRecipe();
   }, []);
+
 
   return (
     <>
@@ -88,24 +162,41 @@ const Recipe = () => {
                       className="img-fluid"
                     />
                   </div>
-                  <p className="mt-4 mt-lg-5 lh-lg">
-                    {" "}
-                    {recipe.desc.replace(/(<([^>]+)>)/gi, "")}{" "}
-                  </p>
-
-                  <div className="mt-5 py-4">
-                    <h4 className="fw-bold fs-4">Cara Pembuatan</h4>
-                    <ol className="list-unstyled mt-4">
-                      {recipe.step.map((text, index) => (
-                        <li key={index} className="w-100">
-                          <p className="fs-6 lh-lg">
-                            {text.replace(index + 1, "")}
-                          </p>
-                        </li>
-                      ))}
-                    </ol>
+                  <div className="mt-4 mt-lg-5 lh-lg">
+                    {
+                      parse(recipe.desc)
+                    }
                   </div>
+
+                  {
+                    recipe?.step ?
+
+                    <div className="mt-5 py-4">
+                      <h4 className="fw-bold fs-4">Cara Pembuatan</h4>
+                      <ol className="list-unstyled mt-4">
+                        { recipe.step.map((text, index) => (
+                          <li key={index} className="w-100">
+                            <p className="fs-6 lh-lg">
+                              { text.replace(index + 1, "") }
+                            </p>
+                          </li>
+                        ))
+                        }
+                      </ol>
+                    </div>
+
+                    : 
+
+                    false
+                  }
+                  
                   <div className={`mt-5 ${absolute_board_recipe}`} style={{display:`${mobile && show ? "block" : ""}`}}>
+                    <button 
+                      className={`d-flex ${bookmark_btn}`}
+                      onClick={bookmarkOnClick}
+                    >
+                      <span className={`material-icons-round ${ isBookmark ? on_bookmark : "" }`}>bookmark</span>
+                    </button>
                     <div className={`${container_category_recipe}`}>
                       <img src={TimeIcon} alt="icon" />
                       <span>{recipe.category.times}</span>
@@ -151,7 +242,3 @@ const Recipe = () => {
 };
 
 export default Recipe;
-
-/*
-
-*/

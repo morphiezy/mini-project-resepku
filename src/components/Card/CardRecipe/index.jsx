@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import style from "./style.module.css";
 import porsiIcon from "../../../img/porsi.svg";
 import durasiIcon from "../../../img/duration.svg";
@@ -7,7 +7,7 @@ const { card_container, thumbnail, card_title, icon, text_info } = style;
 
 const CardRecipe = ({ link, custom_style, img, title, porsi, durasi }) => {
   return (
-    <NavLink
+    <Link
       to={`/resep/${link}`}
       className={`${custom_style ? custom_style : ""} ${card_container}`}
     >
@@ -25,7 +25,7 @@ const CardRecipe = ({ link, custom_style, img, title, porsi, durasi }) => {
           <span className={text_info}>{durasi}</span>
         </div>
       </div>
-    </NavLink>
+    </Link>
   );
 };
 

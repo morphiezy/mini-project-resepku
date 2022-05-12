@@ -6,6 +6,7 @@ import { fetchArticleDetail } from "../../store/Article/thunk";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Loading from "../../components/Loading";
+import ContentNotFound from '../../components/ContentNotFound'
 
 import style from './style.module.css'
 
@@ -32,6 +33,7 @@ const Article = () => {
         fetch()
     },[])
 
+    const articleReady = Object.keys(article).every(prop => article[prop] !== "");
 
     return(
         <>
@@ -41,18 +43,28 @@ const Article = () => {
               <>
                 <Navbar />
 
-                <div className="container-fluid mt-5 mt-lg-0 px-4 px-md-5 ">
-                    <div className={`py-5 ${container_article}`}>
-                        <h1 className="text-center fs-1 fw-bold lh-base">{article.title}</h1>
-                        <p className={`text-center my-4 ${article_info}`}>Dibuat pada <span className="fw-bold">{article.date_published}</span> oleh <span className="fw-bold text_highlight">{article.author}</span></p>
+                <>
+                    <div className="container-fluid mt-5 mt-lg-0 px-4 px-md-5 py-5">
+                        {
+                            articleReady ? 
 
-                        <div className={`${thumbnail}`}>
-                            <img src={article.thumb} alt="thumbnail"/>
-                        </div>
+                            <div className={`py-5 ${container_article}`}>
+                                <h1 className="text-center fs-1 fw-bold lh-base">{article.title}</h1>
+                                <p className={`text-center my-4 ${article_info}`}>Dibuat pada <span className="fw-bold">{article.date_published}</span> oleh <span className="fw-bold text_highlight">{article.author}</span></p>
 
-                        <p className={`lh-lg ${article_desc}`}>{article.description}</p>
-                    </div>
-                </div>
+                                <div className={`${thumbnail}`}>
+                                    <img src={article.thumb} alt="thumbnail"/>
+                                </div>
+
+                                <p className={`lh-lg ${article_desc}`}>{article.description}</p>
+                            </div>
+
+                            :
+
+                            <ContentNotFound/>
+                        }
+                    </div> 
+                </>
 
                 <Footer/>
               </>

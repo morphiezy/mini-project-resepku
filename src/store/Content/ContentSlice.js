@@ -30,7 +30,8 @@ const contentSlice = createSlice({
         }
     },
     extraReducers : (builder) =>{
-        builder.addCase(fetchFilterContent.fulfilled , (state, {payload}) => {
+        builder
+        .addCase(fetchFilterContent.fulfilled , (state, {payload}) => {
             const { contentType, initialFetch, temporaryData } = payload;
             
             if(initialFetch){
@@ -41,7 +42,10 @@ const contentSlice = createSlice({
             else state[contentType].list = temporaryData.content;
         })
         .addCase(searchRecipe.fulfilled, (state,{ payload }) => {
-            state.search.results = payload;
+
+            const {apollo , api} = payload;
+            const userRecipe = apollo.map(resep => ({...resep , serving : resep.servings}))
+            state.search.results = [...userRecipe, ...api]
         })
     }
 })

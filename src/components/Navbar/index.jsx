@@ -93,8 +93,13 @@ const Navbar = () => {
                 </button>
                 <ul className={`dropdown-menu dropdown-menu-end ${menu_list}`}>
                   <li>
-                    <a className="dropdown-item" href="/">
-                      Create Recipe
+                    <a className="dropdown-item" href="/create-recipe">
+                      Publish Recipe
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/bookmark-recipe">
+                      Bookmark
                     </a>
                   </li>
                   <li>
