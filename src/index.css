@@ -47,3 +47,7 @@ body{
 p{
     margin-bottom: 0;
 }
+
+.h-50vh{
+    min-height: 50vh;
+}

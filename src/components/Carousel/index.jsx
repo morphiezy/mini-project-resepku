@@ -2,7 +2,7 @@ import { ScrollingCarousel } from "@trendyol-js/react-carousel";
 import { useEffect } from "react";
 
 import CardRecipe from "../Card/CardRecipe";
-import CardArticle from "../Card/CardAriticle";
+import CardArticle from "../Card/CardArticle";
 import Button from "../Button";
 import ButtonArrow from "./ButtonArrow";
 

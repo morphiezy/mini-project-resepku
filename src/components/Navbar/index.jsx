@@ -103,7 +103,7 @@ const Navbar = () => {
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="/bookmark-recipe">
+                    <a className="dropdown-item" href="/bookmark">
                       Bookmark
                     </a>
                   </li>

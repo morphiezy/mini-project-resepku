@@ -31,7 +31,10 @@ const App = () => {
         </Route>
         <Route element={<ProtectedRoute authenticated={isAuthenticated} children={<NoMatch/>}/>}>
           <Route path='/create-recipe' element={<CreateRecipe/>}/>
-          <Route path='/my-creation' element={<MyCreation/>}/>
+          <Route path='/my-creation'>
+            <Route index element={<MyCreation/>}/>
+            <Route path=':key/edit' element ={<CreateRecipe isEdit={true}/>}/>
+          </Route>
         </Route>
         <Route path='/search' element={<Search/>}/>
         <Route path='/resep/:key' element={<Recipe auth={isAuthenticated}/>}/>
