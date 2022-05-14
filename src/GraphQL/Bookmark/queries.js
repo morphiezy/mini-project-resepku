@@ -24,16 +24,25 @@ const AddBookMark = gql`
 
 const DeleteBookMark = gql`
     mutation DeleteBookMark($key: String!, $user_id: uuid!) {
-        delete_bookmark(where: {id: {}, key: {_eq: $key}, user_id: {_eq: $user_id}}) {
+        delete_bookmark(where: {key: {_eq: $key}, user_id: {_eq: $user_id}}) {
             returning {
-                id
-                key
-                user_id
+            id
+            key
+            user_id
             }
         }
     } 
 `
 
+const UpdateBookmark = gql`
+    mutation UpdateBookmark($key: String!, $new_key: String!) {
+        update_bookmark(where: {key: {_eq: $key}}, _set: {key: $new_key}) {
+            returning {
+                id
+            }
+        }
+    }  
+`
 
 
-export { FindBookmarkRecipe , AddBookMark , DeleteBookMark }
+export { FindBookmarkRecipe , AddBookMark , DeleteBookMark, UpdateBookmark }
