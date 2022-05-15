@@ -13,6 +13,7 @@ const Recipe = lazy(()=> import('./pages/Recipe'));
 const Article = lazy(()=> import('./pages/Article'));
 const CreateRecipe = lazy(()=> import('./pages/CreateRecipe'));
 const MyCreation = lazy(()=> import('./pages/MyCreation'));
+const Bookmark = lazy(()=> import('./pages/Bookmark'));
 const NoMatch = lazy(()=> import('./pages/NoMatch'));
 
 
@@ -35,6 +36,7 @@ const App = () => {
             <Route index element={<MyCreation/>}/>
             <Route path=':key/edit' element ={<CreateRecipe isEdit={true}/>}/>
           </Route>
+          <Route path="/bookmark" element={<Bookmark/>}/>
         </Route>
         <Route path='/search' element={<Search/>}/>
         <Route path='/resep/:key' element={<Recipe auth={isAuthenticated}/>}/>

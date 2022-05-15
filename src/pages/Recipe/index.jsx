@@ -61,11 +61,6 @@ const Recipe = ({auth}) => {
   const MySwal = withReactContent(Swal);
 
 
-  const graphQLVar = {
-    key: params.key,
-    user_id: user.id
-  }
-
   const { data } = useQuery(FindBookmarkRecipe , 
     { 
       variables : { 
@@ -103,7 +98,12 @@ const Recipe = ({auth}) => {
         icon: 'success',
         title: 'Unbookmark Recipe'
       })
-      return removeBookmark({ variables : graphQLVar })
+      return removeBookmark({ variables : 
+        {
+          key: params.key,
+          user_id: user.id
+        } 
+      })
     }
     else{
       setBookmark(true)
@@ -111,7 +111,15 @@ const Recipe = ({auth}) => {
         icon: 'success',
         title: 'Bookmark Recipe'
       })
-      return addBookMark({variables : graphQLVar})
+      return addBookMark({variables : 
+        {
+          key: params.key,
+          user_id: user.id,
+          title: recipe.title,
+          thumb: recipe.thumb,
+          added_at : new Date().toJSON().split("T")[0]
+        } 
+      })
     }
 
   }

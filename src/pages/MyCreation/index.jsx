@@ -54,7 +54,7 @@ const MyCreation = () => {
     })
     .then( async (result) => {
 
-      if (result.isConfirmed) {
+      if(result.isConfirmed) {
         await deleteRecipe({variables : { id: recipeID }});
         await refetch();
         await deleteBookmark({variables : {user_id : id , key : key}})
@@ -93,7 +93,7 @@ const MyCreation = () => {
                     <p className={`mt-3 text-dark text-opacity-25 fs-5`}>You don't have any <br/> items</p>
                   </div>
                   
-                  :
+                  : 
 
                   <div className={container_grid}>
                     {
@@ -102,7 +102,8 @@ const MyCreation = () => {
                           key={myRecipe.id}
                           banner={myRecipe.thumb}
                           titleRecipe={myRecipe.title}
-                          created={myRecipe.author.datePublished}
+                          categoryTime="Created"
+                          date={myRecipe.author.datePublished}
                           path={myRecipe.key}
                         >
                           <div className='mt-2 mt-md-3 me-5 float-md-end'>

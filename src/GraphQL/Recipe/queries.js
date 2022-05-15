@@ -1,6 +1,5 @@
 import { gql } from "@apollo/client";
 
-
 const AddRecipe = gql`
     mutation CreateRecipe($author: jsonb!, $desc: String!, $dificulty: String!, $ingredient: jsonb!, $key: String!, $servings: String!, $thumb: String!, $times: String!, $title: String!, $user_id: uuid!) {
         insert_resep(objects: {author: $author, desc: $desc, dificulty: $dificulty, ingredient: $ingredient, key: $key, servings: $servings, thumb: $thumb, times: $times, title: $title, user_id: $user_id}) {
@@ -21,16 +20,16 @@ const DeleteRecipe = gql`
             }
         }
     }
-`
+`;
 
 const SearchUserRecipe = gql`
     query FindRecipe($_like: String!) {
-        resep(where: {key: {_like: $_like}}) {
-            title
-            thumb
-            key
-            times
-            servings
+        resep(where: {key: {_regex: $_like}}) {
+        title
+        thumb
+        key
+        times
+        servings
         }
     }  
 `;
@@ -50,6 +49,5 @@ const FindUserRecipeByKey = gql`
         }
     }  
 `;
-
 
 export { AddRecipe, SearchUserRecipe, FindUserRecipeByKey, DeleteRecipe };
