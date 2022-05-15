@@ -1,8 +1,9 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 
 const client = new ApolloClient({
-    uri: 'https://mini-project-resepku.hasura.app/v1/graphql',
+    uri: process.env.REACT_APP_HASURA_URI,
     cache: new InMemoryCache()
 });
+
 
 export { client }

@@ -39,7 +39,7 @@ const searchRecipe = createAsyncThunk('content/search' , async (value) =>{
 
     const fetchUserRecipe = await client.query({
         query: SearchUserRecipe,
-        variables: {_like:`%${value}%`},
+        variables: {_like: value},
         notifyOnNetworkStatusChange: true,
     });
 
