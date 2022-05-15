@@ -1,0 +1,14 @@
+.container{
+    background-color: var(--primary-color);
+}
+
+.container > img{
+    width: 220px;
+}
+
+
+@media screen and (max-width:576px){
+    .container > img{
+        width: 160px;
+    }
+}

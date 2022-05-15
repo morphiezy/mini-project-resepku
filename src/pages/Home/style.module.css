@@ -1,0 +1,23 @@
+.highlight_title{
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.subtitle_text{
+    color:var(--subtitle-color);
+}
+
+
+@media screen and (max-width: 992px){
+    .flex_container > div:first-of-type{
+        order: 2;
+    }
+
+    .flex_container > div:last-of-type{
+        order: 1;
+    }
+
+    .flex_container > div:last-of-type > img {
+        width: 350px;
+    }
+}

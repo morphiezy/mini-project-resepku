@@ -1,0 +1,40 @@
+.container_card{
+    max-width: 280px;
+    width: 100%;
+    border: 1px solid #EFEFEF;
+    border-radius: 15px;
+    text-decoration: none;
+}
+
+.thumbnail_wrapper{
+    width: 100%;
+    height: 180px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.thumbnail_wrapper > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.label_text{
+    color:var(--primary-color);
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.title_text{
+    font-size: 14px;
+    color:var(--title-color);
+    font-weight: 700;
+    
+    overflow: hidden;
+    width: 100%;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
