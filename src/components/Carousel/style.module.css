@@ -21,3 +21,10 @@
 .scrolling_carousel_content > div[data-arrow="right"]{
     right: 0;
 }
+
+.grid_container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+    grid-auto-rows: 130px;
+    gap: 40px;
+}

@@ -1,12 +1,15 @@
 .container_card{
-    max-width: 280px;
     width: 100%;
     border: 1px solid #EFEFEF;
-    border-radius: 15px;
+    border-radius: 10px;
     text-decoration: none;
 }
 
-.thumbnail_wrapper{
+.container_card:hover{
+    background-color: #FAFAFF;
+}
+
+/* .thumbnail_wrapper{
     width: 100%;
     height: 180px;
     border-radius: 15px;
@@ -18,7 +21,7 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
-}
+} */
 
 .label_text{
     color:var(--primary-color);
