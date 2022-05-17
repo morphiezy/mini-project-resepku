@@ -23,15 +23,15 @@ const DeleteRecipe = gql`
 `;
 
 const SearchUserRecipe = gql`
-    query FindRecipe($_like: String!) {
-        resep(where: {key: {_regex: $_like}}) {
-        title
-        thumb
-        key
-        times
-        servings
+    query FindRecipe($_ilike: String!) {
+        resep(where: {title: {_ilike: $_ilike}}) {
+            title
+            thumb
+            key
+            times
+            servings
         }
-    }  
+    }   
 `;
 
 const FindUserRecipeByKey = gql`
