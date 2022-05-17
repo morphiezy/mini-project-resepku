@@ -1,5 +1,9 @@
 import { useMobileDetect } from "../../customHooks/useMobileDetect";
 
+
+import { fetchFilterContent } from "../../store/Content/thunk";
+import { useDispatch,useSelector } from "react-redux";
+
 import SearchRecipe from "../../components/SearchRecipe";
 import Navbar from "../../components/Navbar";
 import MyCarousel from "../../components/Carousel";
@@ -7,6 +11,8 @@ import Footer from "../../components/Footer";
 
 import style from "./style.module.css";
 import animation from "../../img/animation.png";
+import { useEffect } from "react";
+
 
 const {
   flex_container,
@@ -17,7 +23,16 @@ const {
 
 const Home = () => {
 
-  const [mobile] = useMobileDetect(579)
+  const article = useSelector(state => state.content.article.list);
+  const dispatch = useDispatch();
+  
+  const [mobile] = useMobileDetect(579);
+
+  useEffect(()=>{
+    const contentLength = article.length > 0;
+    dispatch(fetchFilterContent({initialFetch:!contentLength , contentType: "article"}))
+  },[])
+
 
   return (
     <>
@@ -54,8 +69,14 @@ const Home = () => {
 
           {/* End Welcome Area */}
 
+          {/* Recipe Carousel */}
+
           <MyCarousel carousel_title="Daftar Resep Pilihan" content_type="recipes"/>
-          <MyCarousel carousel_title="Artikel Seputar Masakan" content_type="article"/> 
+
+          {/* Article Carousel */}
+
+          <MyCarousel carousel_title="Artikel Seputar Masakan" content_type="article" grid={true}/>
+          
         </div>
       </div>
       <Footer/>

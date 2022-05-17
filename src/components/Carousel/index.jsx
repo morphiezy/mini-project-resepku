@@ -14,10 +14,10 @@ import { changeFilter } from "../../store/Content/ContentSlice";
 
 
 
-const {scrolling_carousel_filter, scrolling_carousel_content, filter_btn} = style;
+const {scrolling_carousel_filter, scrolling_carousel_content, filter_btn , grid_container} = style;
 
 
-const MyCarousel = ({carousel_title , content_type }) => {
+const MyCarousel = ({carousel_title , content_type, grid}) => {
 
     const carouselData = useSelector(state => state.content[content_type]);
     const currentFilter = carouselData.currentFilter;
@@ -47,35 +47,67 @@ const MyCarousel = ({carousel_title , content_type }) => {
                     )
                 }
             </ScrollingCarousel>
-            <ScrollingCarousel 
-                className={`mt-5 ${scrolling_carousel_content}`} 
-                leftIcon={<ButtonArrow google_icon="chevron_left"/>}
-                rightIcon={<ButtonArrow google_icon="chevron_right"/>}
-            >
-                {
-                    carouselData.list.map(item => {
-                        return content_type === "article" ? 
+            {
+                grid ?
+                
+                <div className={`mt-5 ${grid_container}`}>
+                    {
+                        carouselData.list.map(item => {
+                            return content_type === "article" ? 
 
-                            <CardArticle
-                                key={item.title}
-                                link={item.key}
-                                custom_style="me-3"
-                                thumbnail={item.thumb}
-                                category={item.tags}
-                                title={item.title}
-                            /> :
-                            <CardRecipe 
-                                custom_style="me-3"
-                                key={item.key}
-                                link={item.key}
-                                img={item.thumb}
-                                title={item.title}
-                                porsi={item.portion}
-                                durasi={item.times}
-                            />
-                    })
-                }
-            </ScrollingCarousel>
+                                <CardArticle
+                                    key={item.title}
+                                    link={item.key}
+                                    custom_style="me-3"
+                                    thumbnail={item.thumb}
+                                    category={item.tags}
+                                    title={item.title}
+                                /> :
+                                <CardRecipe 
+                                    custom_style="me-3"
+                                    key={item.key}
+                                    link={item.key}
+                                    img={item.thumb}
+                                    title={item.title}
+                                    porsi={item.portion}
+                                    durasi={item.times}
+                                />
+                        })
+                    }
+                </div>
+                
+                : 
+
+                <ScrollingCarousel 
+                    className={`mt-5 ${scrolling_carousel_content}`} 
+                    leftIcon={<ButtonArrow google_icon="chevron_left"/>}
+                    rightIcon={<ButtonArrow google_icon="chevron_right"/>}
+                >
+                    {
+                        carouselData.list.map(item => {
+                            return content_type === "article" ? 
+
+                                <CardArticle
+                                    key={item.title}
+                                    link={item.key}
+                                    custom_style="me-3"
+                                    thumbnail={item.thumb}
+                                    category={item.tags}
+                                    title={item.title}
+                                /> :
+                                <CardRecipe 
+                                    custom_style="me-3"
+                                    key={item.key}
+                                    link={item.key}
+                                    img={item.thumb}
+                                    title={item.title}
+                                    porsi={item.portion}
+                                    durasi={item.times}
+                                />
+                        })
+                    }
+                </ScrollingCarousel>
+            }
         </div>
     )
 }
