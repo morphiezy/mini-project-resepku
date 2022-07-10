@@ -6,7 +6,6 @@ import { useDispatch,useSelector } from "react-redux";
 
 import SearchRecipe from "../../components/SearchRecipe";
 import Navbar from "../../components/Navbar";
-import MyCarousel from "../../components/Carousel";
 import Footer from "../../components/Footer";
 
 import style from "./style.module.css";
@@ -67,16 +66,7 @@ const Home = () => {
             </div>
           </div>
 
-          {/* End Welcome Area */}
-
-          {/* Recipe Carousel */}
-
-          <MyCarousel carousel_title="Daftar Resep Pilihan" content_type="recipes"/>
-
-          {/* Article Carousel */}
-
-          <MyCarousel carousel_title="Artikel Seputar Masakan" content_type="article" grid={true}/>
-          
+          {/* End Welcome Area */}          
         </div>
       </div>
       <Footer/>
